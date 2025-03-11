@@ -24,7 +24,7 @@ ultralytics.checks()
 # Load dataset using Roboflow
 from roboflow import Roboflow
 
-SECRET_API_KEY = "YOUR_ROBOFLOW_API_KEY"  # Replace with your Roboflow API Key
+SECRET_API_KEY = "R8JQyQmyXKa0HMr7HzJT"  # Replace with your Roboflow API Key
 rf = Roboflow(api_key=SECRET_API_KEY)
 project = rf.workspace("ds-gfhaj").project("textile-defect-datasts")
 version = project.version(2)
