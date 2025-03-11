@@ -48,37 +48,10 @@ def train_yolo():
         "yolo", "task=detect", "mode=train", f"model={model}",
         f"data={dataset.location}/data.yaml", f"epochs={epochs}",
         f"imgsz={img_size}", f"batch={batch_size}",
-        f"lr0={learning_rate}", f"momentum={momentum}",
         f"weight_decay={weight_decay}", "plots=True"
     ]
 
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
-
-    loss_values = []
-
-    # plt.ion()
-    # fig, ax = plt.subplots()
-    # ax.set_xlabel("Epoch")
-    # ax.set_ylabel("Loss")
-    # ax.set_title("Training Loss Progress")
-
-    for line in iter(process.stdout.readline, ''):
-        print(line, end='')
-        # if "loss:" in line.lower():
-            # parts = line.strip().split()
-            # try:
-            #     loss_index = parts.index("loss:") + 1
-            #     loss = float(parts[loss_index])
-            #     loss_values.append(loss)
-            #     ax.plot(loss_values, marker='o', linestyle='-', color='b')
-            #     plt.draw()
-            #     plt.pause(0.1)
-            # except (ValueError, IndexError):
-            #     pass
-
-    # process.wait()
-    # plt.ioff()
-    # plt.show()
+    subprocess.run(command, check=True)
 
 
 def get_latest_train_folder():
