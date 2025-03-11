@@ -9,9 +9,6 @@ import time
 HOME = os.getcwd()
 print(f"Working Directory: {HOME}")
 
-datadir = os.path.join(HOME, "datasets")
-os.makedirs(datadir, exist_ok=True)
-
 # Install YOLO11 if not installed
 try:
     import ultralytics
@@ -26,19 +23,17 @@ from roboflow import Roboflow
 
 SECRET_API_KEY = "R8JQyQmyXKa0HMr7HzJT"  # Replace with your Roboflow API Key
 rf = Roboflow(api_key=SECRET_API_KEY)
-project = rf.workspace("ds-gfhaj").project("textile-defect-datasts")
-version = project.version(2)
+project = rf.workspace("project-lp5e2").project("fabvision-ub55i")
+version = project.version(4)
 dataset = version.download("yolov11")
 
 os.environ['WANDB_MODE'] = 'disabled'  # Disable WandB logging
 
 # Hyperparameters
-epochs = 10
-img_size = 640
+epochs = 200
+img_size = 1080
 model = 'yolo11x.pt'
 batch_size = 8  # Adjust batch size
-learning_rate = 0.01  # Adjust learning rate
-momentum = 0.937  # Adjust momentum
 weight_decay = 0.0005  # Adjust weight decay
 
 
@@ -48,7 +43,7 @@ def train_yolo():
         "yolo", "task=detect", "mode=train", f"model={model}",
         f"data={dataset.location}/data.yaml", f"epochs={epochs}",
         f"imgsz={img_size}", f"batch={batch_size}",
-        f"weight_decay={weight_decay}", "plots=True"
+        f"weight_decay={weight_decay}", "plots=True", "patience=50"
     ]
 
     subprocess.run(command, check=True)
