@@ -96,7 +96,7 @@ while True:
     print(netFps)
     cv2.putText(frame, netFps, (0, 0), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-    if True:
+    if show:
         cv2.imshow('Camera feed', frame)
 
     fps = 1.0 / (time.perf_counter() - fps_time)
