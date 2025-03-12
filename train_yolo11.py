@@ -31,7 +31,7 @@ os.environ['WANDB_MODE'] = 'disabled'  # Disable WandB logging
 
 # Hyperparameters
 epochs = 200
-img_size = 1080
+img_size = 640
 model = 'yolo11x.pt'
 batch_size = 8  # Adjust batch size
 weight_decay = 0.0005  # Adjust weight decay
