@@ -23,17 +23,17 @@ from roboflow import Roboflow
 
 SECRET_API_KEY = "R8JQyQmyXKa0HMr7HzJT"  # Replace with your Roboflow API Key
 rf = Roboflow(api_key=SECRET_API_KEY)
-project = rf.workspace("project-lp5e2").project("fabvision-ub55i")
-version = project.version(4)
+project = rf.workspace("kumasai").project("fabric-pzimg")
+version = project.version(2)
 dataset = version.download("yolov11")
 
 os.environ['WANDB_MODE'] = 'disabled'  # Disable WandB logging
 
 # Hyperparameters
-epochs = 200
-img_size = 640
+epochs = 350
+img_size = 512
 model = 'yolo11x.pt'
-batch_size = 8  # Adjust batch size
+batch_size = 1  # Adjust batch size
 weight_decay = 0.0005  # Adjust weight decay
 
 
@@ -43,7 +43,7 @@ def train_yolo():
         "yolo", "task=detect", "mode=train", f"model={model}",
         f"data={dataset.location}/data.yaml", f"epochs={epochs}",
         f"imgsz={img_size}", f"batch={batch_size}",
-        f"weight_decay={weight_decay}", "plots=True", "patience=50"
+        "plots=True", "patience=50", "cache=False", "amp=True"
     ]
 
     subprocess.run(command, check=True)

@@ -37,11 +37,11 @@ def connect_mqtt():
 # client.loop_start()
 
 # Load the exported TensorRT model
-trt_model = YOLO("runs/detect/train6/weights/best.pt", task= "detect")
+trt_model = YOLO("runs/detect/train24/weights/best.pt", task= "detect")
 
 # # Open the CSI camera (video0)
-cap = cv2.VideoCapture("/dev/video0")
-# cap = cv2.VideoCapture("../input/video/ad_short.mp4")
+# cap = cv2.VideoCapture("/dev/video0")
+cap = cv2.VideoCapture("inputs/ad_short.mp4")
 
 if not cap.isOpened():
     print("Error: Camera not found!")
@@ -96,8 +96,9 @@ while True:
     print(netFps)
     cv2.putText(frame, netFps, (0, 0), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-    if show:
+    if True:
         cv2.imshow('Camera feed', frame)
+        cv2.waitKey(20)
 
     fps = 1.0 / (time.perf_counter() - fps_time)
     print("Net FPS: %f" % (fps))

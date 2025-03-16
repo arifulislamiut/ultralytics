@@ -47,8 +47,9 @@ def publish(client):
 # client.loop_start()
 
 # Load the exported TensorRT model
-trt_model = YOLO("runs/detect/train6/weights/best.engine", task= "detect")
-results = trt_model.predict(source = 0, show =True, save=True, verbose=False, half=True, task = "detect", stream= True)
+trt_model = YOLO("runs/detect/train24/weights/best.engine", task= "detect")
+results = trt_model.track(source = 0, show =True, save=True, verbose=False, half=True, task = "detect", stream= True)
+# results = trt_model.track(source="https://youtu.be/LNwODJXcvt4", show=True)
 
 fps_time = time.perf_counter()
 
